@@ -1,0 +1,42 @@
+/* ============= CSS général ================*/
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  min-height: 100%;
+  background-color: #1a1a1a;
+  display: flex;
+}
+
+/* =========== Input Search =============*/
+
+.searchContainer {
+  width: 50%;
+  height: 24px;
+  border: 1px solid red;
+  margin: auto;
+}
+
+
+/*.searchContainer {
+  margin: 250px auto 0 auto;
+  border: 1px solid red;
+  width: 500px;
+}
+
+ input {
+  width: 500px;
+  height: 24px;
+  margin: auto;
+}
+
+.iBtn {
+  position: absolute;
+  right: -20px;
+}*/
