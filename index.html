@@ -10,7 +10,6 @@
 
     <!-- CSS -->
     <link rel="stylesheet" type="text/css" href="style.css">
-    <link rel="stylesheet" type="text/css" href="grid.css">
 
   </head>
 
@@ -18,8 +17,12 @@
 
     <!-- Barre de recherche -->
     <div class="searchContainer">
-      <input type="text" placeholder="Rechercher">
-      <span class="iBtn"><i data-feather="search" onclick=""></span></i>
+      <input id="inputFilm" type="text" placeholder="Rechercher" autofocus>
+      <span class="iconLoupe"><i data-feather="search" onclick=""></i></span>
+    </div>
+
+    <div id="results">
+
     </div>
 
     <!-- JS -->

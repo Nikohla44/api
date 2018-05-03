@@ -12,31 +12,55 @@ body {
   min-height: 100%;
   background-color: #1a1a1a;
   display: flex;
+  flex-direction: column;
 }
 
 /* =========== Input Search =============*/
 
 .searchContainer {
   width: 50%;
-  height: 24px;
-  border: 1px solid red;
+  height:40px;
   margin: auto;
-}
-
-
-/*.searchContainer {
-  margin: 250px auto 0 auto;
-  border: 1px solid red;
-  width: 500px;
+  display: flex;
 }
 
  input {
-  width: 500px;
-  height: 24px;
+  width: 470px;
+  height: 30px;
   margin: auto;
 }
 
-.iBtn {
-  position: absolute;
-  right: -20px;
-}*/
+.iconLoupe {
+  background-color: #e8ebef;
+  height: 34px;
+  margin: auto;
+}
+
+/*=========== Results ===========*/
+#results {
+  display: flex;
+  flex-wrap: wrap;
+  border: 2px solid red;
+  width: 60%;
+  margin: 0.5em auto;
+  justify-content: center;
+  align-items: center;
+  background-color: #303133;
+  color: #fff;
+}
+
+.boxImg {
+  min-height: 278px;
+}
+
+.item {
+  width: 185px;
+  margin: 0.5em;
+}
+
+.itemInfos {
+  min-height: 40px;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
