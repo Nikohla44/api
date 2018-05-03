@@ -82,3 +82,50 @@ body {
   font-family: 'Heebo', sans-serif;
   font-size: 1.2em;
 }
+
+/*=========== Modal ===========*/
+.modal_container {
+  height: 100%;
+  width: 100vw;
+  position: fixed;
+  top: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: none;
+}
+
+.movie_modal {
+  width: 550px;
+  height: 600px;
+  margin: auto;
+  position: fixed;
+  top: 0px;
+  bottom: 0px;
+  right: 0px;
+  left: 0px;
+  background: white;
+  border: 2px solid #222;
+  padding: 20px;
+  box-shadow: 0px 0px 50px 5px black;
+}
+
+.close-button {
+    float: right;
+    width: 1.5rem;
+    line-height: 1.5rem;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 0.25rem;
+    background-color: lightgray;
+}
+
+.close-button:hover {
+    background-color: darkgray;
+}
+
+.show-modal {
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1.0);
+    transition: visibility 0s linear 0s, opacity 0.25s 0s, transform 0.25s;
+}
