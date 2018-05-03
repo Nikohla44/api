@@ -28,6 +28,8 @@ function getvalue(film) {
                 item.classList.add("item")
                 boxImg.classList.add("boxImg")
                 itemInfos.classList.add("itemInfos")
+                itemTitle.classList.add("itemTitle")                
+                itemYear.classList.add("itemYear")
                 results.appendChild(item)
             }
 

@@ -25,28 +25,35 @@ body {
 }
 
  input {
-  width: 470px;
+  width: 50vw;
   height: 30px;
   margin: auto;
 }
 
 .iconLoupe {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-color: #e8ebef;
   height: 34px;
+  width: 50px;
   margin: auto;
+}
+
+.iconLoupe i {
+  width: 25px;
+  height: 25px;
 }
 
 /*=========== Results ===========*/
 #results {
   display: flex;
   flex-wrap: wrap;
-  border: 2px solid red;
   width: 60%;
   margin: 0.5em auto;
   justify-content: center;
   align-items: center;
-  background-color: #303133;
-  color: #fff;
+  color: #000;
 }
 
 .boxImg {
@@ -54,6 +61,7 @@ body {
 }
 
 .item {
+  background-color: #fff;
   width: 185px;
   margin: 0.5em;
 }
@@ -63,4 +71,14 @@ body {
   display: flex;
   flex-direction: column;
   text-align: center;
+}
+
+.itemTitle {
+  font-family: 'Fjalla One', sans-serif;
+  font-size: 1.2em;
+}
+
+.itemYear {
+  font-family: 'Heebo', sans-serif;
+  font-size: 1.2em;
 }
