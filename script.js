@@ -2,11 +2,13 @@
 
 var inputFilm = document.getElementById('inputFilm');
 var filmName;
+var itemId;
 const submit = document.querySelector(".iconLoupe");
 var modalContainer = document.querySelector(".modal_container");
 var movieModal = document.querySelector(".movie_modal");
 var movieInfos = document.querySelector(".movie_infos");
-var itemId;
+var modalId;
+var closeButton = document.querySelector(".close-button");
 
 
 
@@ -53,8 +55,7 @@ function getvalue(film) {
             for (var k = 0; k < items.length; k++) {
                 items[k].addEventListener("click", function() {
                     itemId = this.id
-                    console.log(itemId);
-                    getItemData(id)
+                    changeId(id)
                 })
             }
         }
@@ -63,28 +64,95 @@ function getvalue(film) {
 
 
 //Modal
-// var modal = document.querySelector(".modal");
-//
-// var closeButton = document.querySelector(".close-button");
-//
-//
+
+
 // function windowOnClick(event) {
 //   if (event.target === modal) {
 //    toggleModal();
 //  }
 // }
-
-
-
-function getItemData(id) {
+//Recuperation id de omdb
+function changeId(id) {
     $.ajax ({
-        url: "http://www.omdbapi.com/?apikey=858501f8&t=" + itemId,
+        url: "https://api.themoviedb.org/3/movie/" + id + "?api_key=67cc61914ff7a9cf3c55f2014fa568b1",
         dataType: "json",
         success: function(res) {
-          // movieModal.classList.toggle("show-modal");
+          var newID = res.imdb_id;
+          console.log(newID);
+          getItemData(newID)
+        }
+    });
+}
+
+//Lancement et creation du modal
+function getItemData(infos) {
+    $.ajax ({
+        url: "http://www.omdbapi.com/?apikey=858501f8&i=" + infos,
+        dataType: "json",
+        success: function(res) {
+
+          //Affichage du modal
           modalContainer.style.display = "block";
 
-            // document.getElementById("synopsis").textContent = "Synopsis : " + res.Plot;
+
+            // var image2 = res.Poster
+            var synopsis = res.Plot
+            var runtime = res.Runtime
+            var genre = res.Genre
+            var real = res.Director
+            var scenario = res.Writer
+            var actors = res.Actors
+            var language = res.Language
+            var country = res.Country
+
+
+            var modal = document.createElement("div")
+            // var boxImg2 = document.createElement("div")
+            // var modalImg = document.createElement("img")
+            var modalInfos = document.createElement("div")
+            var modalSynopsis = document.createElement("p")
+            var modalRuntime = document.createElement("span")
+            var modalGenre = document.createElement("span")
+            var modalReal = document.createElement("span")
+            var modalScenar = document.createElement("span")
+            var modalAct = document.createElement("span")
+            var modalLanguage = document.createElement("span")
+            var modalCountry = document.createElement("span")
+
+            //modalImg.src = "http://image.tmdb.org/t/p/w185/" + image2
+            modalSynopsis.appendChild(document.createTextNode(synopsis))
+            modalRuntime.appendChild(document.createTextNode(runtime))
+            modalGenre.appendChild(document.createTextNode(genre))
+            modalReal.appendChild(document.createTextNode(real))
+            modalScenar.appendChild(document.createTextNode(scenario))
+            modalAct.appendChild(document.createTextNode(actors))
+            modalLanguage.appendChild(document.createTextNode(language))
+            modalCountry.appendChild(document.createTextNode(country))
+
+            // boxImg2.appendChild(modalImg)
+            modalInfos.appendChild(modalSynopsis)
+            modalInfos.appendChild(modalRuntime)
+            modalInfos.appendChild(modalGenre)
+            modalInfos.appendChild(modalReal)
+            modalInfos.appendChild(modalScenar)
+            modalInfos.appendChild(modalAct)
+            modalInfos.appendChild(modalLanguage)
+            modalInfos.appendChild(modalCountry)
+            modal.classList.add("modal")
+            // modalImg.classList.add("modalImg")
+            modalInfos.classList.add("modalInfos")
+            modalSynopsis.classList.add("modalSynopsis")
+            modalRuntime.classList.add("modalRuntime")
+            modalGenre.classList.add("modalGenre")
+            modalReal.classList.add("modalReal")
+            modalScenar.classList.add("modalScenar")
+            modalAct.classList.add("modalAct")
+            modalLanguage.classList.add("modalLanguage")
+            modalCountry.classList.add("modalCountry")
+            movieModal.appendChild(modalInfos)
+
+
+                      // document.getElementById("synopsis").textContent = "Synopsis : " + res.Plot;
             // document.getElementById("duree").textContent = "Durée : " + res.Runtime;
             // document.getElementById("genre").textContent = "Genre : " + res.Genre;
             // document.getElementById("real").textContent = "Réalisateur : " + res.Director;
@@ -118,10 +186,9 @@ inputFilm.addEventListener("keypress", function(e) {
     }
 }, false);
 
-// openModal.addEventListener("click", toggleModal);
+// openModal.addEventListener("click", modalContainer);
 // closeButton.addEventListener("click", toggleModal);
 // window.addEventListener("click", windowOnClick);
 
 
-//https://api.themoviedb.org/3/movie/268?api_key=67cc61914ff7a9cf3c55f2014fa568b1 film info
-//https://api.themoviedb.org/3/movie/268/credits?api_key=67cc61914ff7a9cf3c55f2014fa568b1 film credits
+//https://api.themoviedb.org/3/movie/268?api_key=67cc61914ff7a9cf3c55f2014fa568b1 autre affiche = backdrop path
