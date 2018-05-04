@@ -3,6 +3,7 @@
 var inputFilm = document.getElementById('inputFilm');
 var filmName;
 var itemId;
+var newID;
 const submit = document.querySelector(".iconLoupe");
 var modalContainer = document.querySelector(".modal_container");
 var movieModal = document.querySelector(".movie_modal");
@@ -10,8 +11,15 @@ var movieInfos = document.querySelector(".movie_infos");
 var modalId;
 var closeButton = document.querySelector(".close-button");
 
-
-
+var image2;
+var synopsis;
+var runtime;
+var genre;
+var real;
+var scenario;
+var actors;
+var language;
+var country;
 
 
 
@@ -55,7 +63,7 @@ function getvalue(film) {
             for (var k = 0; k < items.length; k++) {
                 items[k].addEventListener("click", function() {
                     itemId = this.id
-                    changeId(id)
+                    changeId(itemId)
                 })
             }
         }
@@ -63,21 +71,13 @@ function getvalue(film) {
 }
 
 
-//Modal
-
-
-// function windowOnClick(event) {
-//   if (event.target === modal) {
-//    toggleModal();
-//  }
-// }
 //Recuperation id de omdb
-function changeId(id) {
+function changeId(itemId) {
     $.ajax ({
-        url: "https://api.themoviedb.org/3/movie/" + id + "?api_key=67cc61914ff7a9cf3c55f2014fa568b1",
+        url: "https://api.themoviedb.org/3/movie/" + itemId + "?api_key=67cc61914ff7a9cf3c55f2014fa568b1",
         dataType: "json",
         success: function(res) {
-          var newID = res.imdb_id;
+          newID = res.imdb_id;
           console.log(newID);
           getItemData(newID)
         }
@@ -95,22 +95,26 @@ function getItemData(infos) {
           modalContainer.style.display = "block";
 
 
-            // var image2 = res.Poster
-            var synopsis = res.Plot
-            var runtime = res.Runtime
-            var genre = res.Genre
-            var real = res.Director
-            var scenario = res.Writer
-            var actors = res.Actors
-            var language = res.Language
-            var country = res.Country
+            image2 = res.Poster
+            synopsis = res.Plot
+            runtime = res.Runtime
+            genre = res.Genre
+            real = res.Director
+            scenario = res.Writer
+            actors = res.Actors
+            language = res.Language
+            country = res.Country
+
+            // Réinitialisation des données
+            modalContainer.style.display = "inline" // Enleve le display none de fermeture
 
 
-            var modal = document.createElement("div")
-            // var boxImg2 = document.createElement("div")
-            // var modalImg = document.createElement("img")
+            var modal =  document.createElement("div")
+            var boxImg2 = document.createElement("div")
+            var modalImg = document.createElement("img")
             var modalInfos = document.createElement("div")
-            var modalSynopsis = document.createElement("p")
+            modalInfos.setAttribute('id', "ID")
+            var modalSynopsis = document.createElement("span")
             var modalRuntime = document.createElement("span")
             var modalGenre = document.createElement("span")
             var modalReal = document.createElement("span")
@@ -119,17 +123,18 @@ function getItemData(infos) {
             var modalLanguage = document.createElement("span")
             var modalCountry = document.createElement("span")
 
-            //modalImg.src = "http://image.tmdb.org/t/p/w185/" + image2
-            modalSynopsis.appendChild(document.createTextNode(synopsis))
-            modalRuntime.appendChild(document.createTextNode(runtime))
-            modalGenre.appendChild(document.createTextNode(genre))
-            modalReal.appendChild(document.createTextNode(real))
-            modalScenar.appendChild(document.createTextNode(scenario))
-            modalAct.appendChild(document.createTextNode(actors))
-            modalLanguage.appendChild(document.createTextNode(language))
-            modalCountry.appendChild(document.createTextNode(country))
+            modalImg.src = image2
+            modalSynopsis.appendChild(document.createTextNode("Synopsis : " + synopsis))
+            modalRuntime.appendChild(document.createTextNode("Durée : " + runtime))
+            modalGenre.appendChild(document.createTextNode("Genre : " + genre))
+            modalReal.appendChild(document.createTextNode("Réalisateur : " + real))
+            modalScenar.appendChild(document.createTextNode("Scénario : " + scenario))
+            modalAct.appendChild(document.createTextNode("Avec : " + actors))
+            modalLanguage.appendChild(document.createTextNode("Langues : " + language))
+            modalCountry.appendChild(document.createTextNode("Pays : " + country))
 
-            // boxImg2.appendChild(modalImg)
+            boxImg2.appendChild(modalImg)
+            modalInfos.appendChild(boxImg2)
             modalInfos.appendChild(modalSynopsis)
             modalInfos.appendChild(modalRuntime)
             modalInfos.appendChild(modalGenre)
@@ -139,8 +144,9 @@ function getItemData(infos) {
             modalInfos.appendChild(modalLanguage)
             modalInfos.appendChild(modalCountry)
             modal.classList.add("modal")
-            // modalImg.classList.add("modalImg")
-            modalInfos.classList.add("modalInfos")
+            boxImg2.classList.add("boxImg2")
+            modalImg.classList.add("modalImg")
+            modalInfos.classList.add("modalContent")
             modalSynopsis.classList.add("modalSynopsis")
             modalRuntime.classList.add("modalRuntime")
             modalGenre.classList.add("modalGenre")
@@ -150,17 +156,7 @@ function getItemData(infos) {
             modalLanguage.classList.add("modalLanguage")
             modalCountry.classList.add("modalCountry")
             movieModal.appendChild(modalInfos)
-
-
-                      // document.getElementById("synopsis").textContent = "Synopsis : " + res.Plot;
-            // document.getElementById("duree").textContent = "Durée : " + res.Runtime;
-            // document.getElementById("genre").textContent = "Genre : " + res.Genre;
-            // document.getElementById("real").textContent = "Réalisateur : " + res.Director;
-            // document.getElementById("scenar").textContent = "Scénario : " + res.Writer;
-            // document.getElementById("acteurs").textContent = "Avec : " + res.Actors;
-            // document.getElementById("langue").textContent = "Langue : " + res.Language;
-            // document.getElementById("origine").textContent = "Pays : " + res.Country;
-        }
+          }
     });
 }
 
@@ -186,9 +182,11 @@ inputFilm.addEventListener("keypress", function(e) {
     }
 }, false);
 
-// openModal.addEventListener("click", modalContainer);
-// closeButton.addEventListener("click", toggleModal);
+function toggleModal() {
+  modalContainer.style.display = "none";
+  document.getElementById("ID").remove()//style.display = "none"
+}
+closeButton.addEventListener("click", toggleModal);
 // window.addEventListener("click", windowOnClick);
 
-
-//https://api.themoviedb.org/3/movie/268?api_key=67cc61914ff7a9cf3c55f2014fa568b1 autre affiche = backdrop path
+// A refaire disparition des modals

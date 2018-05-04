@@ -96,7 +96,7 @@ body {
 
 .movie_modal {
   width: 550px;
-  height: 600px;
+  height: 750px;
   margin: auto;
   position: fixed;
   top: 0px;
@@ -107,6 +107,26 @@ body {
   border: 2px solid #222;
   padding: 20px;
   box-shadow: 0px 0px 50px 5px black;
+}
+
+.modalContent {
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.modalContent  span {
+  display: block;
+  font-family: 'Roboto Mono', monospace;
+  font-size: 0.9em;
+
+}
+
+.modalImg {
+  height: 300px;
+}
+
+.boxImg2 {
+  text-align: center;
 }
 
 .close-button {
